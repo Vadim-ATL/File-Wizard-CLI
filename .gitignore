@@ -1,0 +1,16 @@
+# Rust specific
+/target
+**/*.rs.bk
+*.lock
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Temporary files
+.DS_Store
+*.log
+
+# Environment files
+.env
