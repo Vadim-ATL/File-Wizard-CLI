@@ -1,11 +1,11 @@
 use std::collections::HashMap;
 use std::fs;
-use std::path::Path;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use anyhow::{Result, Context};
 
 
-pub fn file_type(entries: fs::ReadDir, path: &Path) -> Result<(), std::io::Error> {
+
+pub fn file_type(entries: fs::ReadDir, dry_run: bool, path: &Path) -> Result<(), std::io::Error> {
     
     let path_buf = path.to_path_buf();
 
@@ -65,28 +65,23 @@ pub fn file_type(entries: fs::ReadDir, path: &Path) -> Result<(), std::io::Error
             .and_then(|n| n.to_str())
             .unwrap_or("unknown")
             .to_string();
-
+            
+            println!("File extension is {}", extension);
+            println!("Moving file:");
+            println!("From: {}", path.display());
+            
             if images.contains(&extension){
                 let dest_path: PathBuf = path_buf.join("Images").join(&filename);
-
-                println!("File extension is {}", extension);
-                println!("Moving file:");
-                println!("From: {}", path.display());
-                println!("To:   {}", dest_path.display());
                 println!("Filename {}", filename);
-
-                fs::rename(&path, dest_path)
-                .with_context(|| format!("Failed to move file {}", filename));
+                if !dry_run{
+                    fs::rename(&path, dest_path)
+                    .with_context(|| format!("Failed to move file {}", filename));
+                }
             }
 
             if music.contains(&extension){
                 let dest_path: PathBuf = path_buf.join("Music").join(&filename);
-
-                println!("File extension is {}", extension);
-                println!("Moving file:");
-                println!("From: {}", path.display());
                 println!("To:   {}", dest_path.display());
-
                 fs::rename(&path, dest_path)
                 .with_context(|| format!("Failed to move file {}", filename));
 
