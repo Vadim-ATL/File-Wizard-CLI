@@ -2,18 +2,20 @@
 
 File Wizard is a powerful CLI tool built on rust for smart file organization, search, and manipulation.
 
-## Requirements
+# Dependencies
 
-Rust = 1.84.1
+- **Rust**: `1.84.1`
 
-anyhow = "1.0.95"
-chrono = "0.4.39"
-clap = { version = "4.5.27", features = ["derive"] }
-log = "0.4.25"
-serde = "1.0.217"
-serde_derive = "1.0.217"
-serde_json = "1.0.137"
-simplelog = "0.12.2"
+| Dependency      | Version       | Features           |
+|-----------------|---------------|--------------------|
+| `anyhow`       | `1.0.95`       | -                  |
+| `chrono`       | `0.4.39`       | -                  |
+| `clap`         | `4.5.27`       | `"derive"`         |
+| `log`          | `0.4.25`       | -                  |
+| `serde`        | `1.0.217`      | -                  |
+| `serde_derive` | `1.0.217`      | -                  |
+| `serde_json`   | `1.0.137`      | -                  |
+| `simplelog`    | `0.12.2`       | -                  |
 
 
 ```bash
