@@ -2,9 +2,28 @@
 
 File Wizard is a powerful CLI tool built on rust for smart file organization, search, and manipulation.
 
+## Requirements
+
+Rust = 1.84.1
+
+anyhow = "1.0.95"
+chrono = "0.4.39"
+clap = { version = "4.5.27", features = ["derive"] }
+log = "0.4.25"
+serde = "1.0.217"
+serde_derive = "1.0.217"
+serde_json = "1.0.137"
+simplelog = "0.12.2"
+
+
+```bash
+cargo build
+cargo run
+```
+
 ## Installation
 
-Use Rust (up to version 1.82.0) and the Cargo package manager to build and run the project.
+Use Rust (up to version 1.84.1) and the Cargo package manager to build and run the project.
 
 ```bash
 cargo build
@@ -22,6 +41,13 @@ cargo run -- --path /path/to/directory
 
 //Dry run (preview changes without moving files)
 cargo run -- --dry-run
+
+//Run file organization by files types (Images, Videos, Music, Other)
+cargo run -- --types
+
+//Revert changes from moving files, all movements from log moved_files wil be moved back
+cargo run -- --revert
+
 ```
 
 ## Contributing

@@ -3,11 +3,12 @@ mod extension;
 mod load;
 mod types;
 mod revert;
+mod utils;
 
+use utils::setup_dirs::setup_dir;
 use clap::Parser;
 use std::path::Path;
 use std::fs;
-use std::fs::create_dir_all;
 
 use file_type::file_type::file_type;
 use extension::extension::extension;
@@ -39,39 +40,32 @@ struct Args{
 
 fn main() -> Result<()> {
 
-    let log_dir = Path::new("./log");
-    let moved_dir = Path::new("./moved_files");
-    
-    create_dir_all(log_dir).unwrap_or_else(|err| {
-        eprintln!("Failed to create log directory: {}", err);
-    });
-
-    create_dir_all(moved_dir).unwrap_or_else(|err| {
-        eprintln!("Failed to create log directory: {}", err);
-    });
-
     let args = Args::parse();
     let path = Path::new(&args.path);
     
-    println!("Working in direction {}", args.path);
-
+    println!("Working in direction {} \n", args.path);
+    
     let entries = fs::read_dir(path)
     .with_context(|| format!("Failed to read directory {}", args.path))?;
 
+
+    setup_dir();
+
     if args.types {
-        println!("Invoking organization by file_type...");
+        println!("Invoking organization by file_type...\n");
         file_type(entries,args.dry_run, path);
     } else {
-        println!("Invoking organization by extension...");
+        println!("Invoking organization by extension... \n");
         let tracked_files = extension(entries, args.dry_run, path)?;
         save_moved_files(&tracked_files)?;
     }
 
     if args.revert {
-        println!("Reverting changes by extension...");
+        println!("Reverting changes by extension...\n");
         let loaded_files = load_moved_file();
         revert_moves(&loaded_files);
     }
     
     Ok(())
 }
+

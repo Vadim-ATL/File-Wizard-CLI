@@ -3,6 +3,10 @@
 **/*.rs.bk
 *.lock
 
+# Ignore moved_files and log directories
+/moved_files/
+/log/
+
 # IDE files
 .vscode/
 .idea/
