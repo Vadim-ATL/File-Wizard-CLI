@@ -54,4 +54,4 @@ For major changes, please open an issue first to discuss what you would like to 
 
 ## License
 
-[MIT LICENSE](LICENSE)
+[Apache 2.0 LICENSE](LICENSE)
